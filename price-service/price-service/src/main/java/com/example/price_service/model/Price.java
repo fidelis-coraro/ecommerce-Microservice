@@ -9,15 +9,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "prices")
 public class Price {
     @Id
     private Long productId;
     private Double price;
+
+    public Price() {
+    }
+
+    public Price(Long productId, Double price) {
+        this.productId = productId;
+        this.price = price;
+    }
 
     public Long getProductId() {
         return productId;

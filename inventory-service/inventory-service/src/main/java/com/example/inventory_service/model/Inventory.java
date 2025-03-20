@@ -9,15 +9,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long productId;
     private Integer quantity;
+
+    public Inventory() {
+    }
+
+    public Inventory(Long productId, Integer quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
 
     public Long getId() {
         return id;

@@ -21,6 +21,10 @@ public class PriceService {
                 .orElseThrow(() -> new PriceNotFoundException("Price not found for product ID: " + productId));
     }
 
+    public Price savePrice(Price price) {
+        return priceRepository.save(price);
+    }
+
     public Price updatePrice(Long productId, Double price) {
         Price priceEntity = priceRepository.findByProductId(productId)
                 .orElseThrow(() -> new PriceNotFoundException("Price not found for product ID: " + productId));

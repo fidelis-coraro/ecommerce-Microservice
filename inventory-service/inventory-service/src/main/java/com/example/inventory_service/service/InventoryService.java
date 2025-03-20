@@ -20,6 +20,10 @@ public class InventoryService {
                 .orElseThrow(() -> new InventoryNotFoundException("Inventory not found for product ID: " + productId));
     }
 
+    public Inventory addInventory(Inventory inventory) {
+        return inventoryRepository.save(inventory);
+    }
+
     public Inventory updateInventory(Long productId, Integer quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
                 .orElseThrow(() -> new InventoryNotFoundException("Inventory not found for product ID: " + productId));

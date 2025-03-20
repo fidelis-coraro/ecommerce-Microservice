@@ -1,5 +1,7 @@
 package com.example.product_service.controller;
 
+import com.example.product_service.DTO.ProductDTO;
+import com.example.product_service.exception.ProductNotFoundException;
 import com.example.product_service.model.Product;
 import com.example.product_service.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,19 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/{category}")
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) {
+        ProductDTO productDTO = productService.getProduct(id);
+
+        if (productDTO == null) {
+            throw new ProductNotFoundException("Product not found with ID: " + id);
+        }
+
+        return ResponseEntity.ok(productDTO);
+    }
+
+
+    @GetMapping("/category/{category}")
     public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
         List<Product> products = productService.getProductsByCategory(category);
         if (products.isEmpty()) {

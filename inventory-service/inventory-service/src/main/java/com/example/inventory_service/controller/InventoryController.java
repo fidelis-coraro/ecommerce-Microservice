@@ -3,6 +3,7 @@ package com.example.inventory_service.controller;
 import com.example.inventory_service.model.Inventory;
 import com.example.inventory_service.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +21,15 @@ public class InventoryController {
         return inventoryService.getInventoryByProductId(productId);
     }
 
+    @PostMapping
+    public Inventory addInventory(@RequestBody Inventory inventory) {
+        return inventoryService.addInventory(inventory);
+    }
+
+
     @PutMapping("/{productId}")
-    public Inventory updateInventory(@PathVariable Long productId, @RequestBody Integer quantity) {
-        return inventoryService.updateInventory(productId, quantity);
+    public Inventory updateInventory(@PathVariable Long productId, @RequestBody Inventory inventory) {
+        return inventoryService.updateInventory(productId, inventory.getQuantity());
     }
 
     @DeleteMapping("/{productId}")

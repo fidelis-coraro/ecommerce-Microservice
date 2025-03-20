@@ -1,43 +1,34 @@
-package com.example.product_service.model;
+package com.example.product_service.DTO;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.*;
+import com.example.inventory_service.model.Inventory;
+import com.example.price_service.model.Price;
+import lombok.Data;
 
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Data
+public class ProductDTO {
     private Long id;
     private String name;
     private String brand;
     private String description;
     private String category;
-    private Long priceId;
-    private Long inventoryId;
     private Boolean available;
+    private Inventory inventory;
+    private Price price;
 
-    public Product() {
+    public ProductDTO() {
     }
 
-    public Product(Long id, String name, String brand, String description, String category, Boolean available) {
+    public ProductDTO(Long id, String name, String brand, String description, String category, Boolean available, Inventory inventory, Price price) {
         this.id = id;
         this.name = name;
         this.brand = brand;
         this.description = description;
         this.category = category;
         this.available = available;
+        this.inventory = inventory;
+        this.price = price;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
     public Long getId() {
         return id;
     }
@@ -70,20 +61,12 @@ public class Product {
         this.description = description;
     }
 
-    public Long getPriceId() {
-        return priceId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setPriceId(Long priceId) {
-        this.priceId = priceId;
-    }
-
-    public Long getInventoryId() {
-        return inventoryId;
-    }
-
-    public void setInventoryId(Long inventoryId) {
-        this.inventoryId = inventoryId;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Boolean getAvailable() {
@@ -94,5 +77,19 @@ public class Product {
         this.available = available;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
+    public void setPrice(Price price) {
+        this.price = price;
+    }
 }
